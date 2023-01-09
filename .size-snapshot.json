@@ -1,13 +1,13 @@
 {
   "lib/packages/recompose/dist/Recompose.umd.js": {
-    "bundled": 45963,
-    "minified": 16127,
-    "gzipped": 4614
+    "bundled": 56786,
+    "minified": 19447,
+    "gzipped": 5671
   },
   "lib/packages/recompose/dist/Recompose.min.js": {
-    "bundled": 42401,
-    "minified": 14847,
-    "gzipped": 4171
+    "bundled": 49264,
+    "minified": 17897,
+    "gzipped": 5075
   },
   "lib/packages/recompose/dist/Recompose.esm.js": {
     "bundled": 32325,

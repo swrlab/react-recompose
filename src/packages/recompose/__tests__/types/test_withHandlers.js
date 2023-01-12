@@ -58,6 +58,7 @@ const enhancer2: HOC<*, EnhancedCompProps> = compose(
   }))
 )
 
+// $FlowFixMe[missing-local-annot] - Missing type on destructuring
 const BaseComp = ({ value, onValueChange }) => (
   <div
     onClick={() => {

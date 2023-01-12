@@ -12,6 +12,7 @@ function mapProps<BaseProps: {}, EnhancedProps>(
 
 type EnhancedProps = { hello: string }
 
+// $FlowFixMe[missing-local-annot] - Missing type on destructuring
 const baseComponent = ({ hello, len }) => (
   <div>
     {(hello: string)}

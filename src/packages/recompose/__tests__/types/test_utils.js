@@ -8,6 +8,7 @@ import type { HOC } from '../..'
 
 type EnhancedCompProps = { a: number }
 
+// $FlowFixMe[missing-local-annot] - Missing type on destructuring
 const A = ({ a, b }) => (
   <div>
     {a}

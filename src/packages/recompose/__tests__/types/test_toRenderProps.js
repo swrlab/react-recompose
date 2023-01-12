@@ -5,42 +5,40 @@ import { compose, withProps, toRenderProps, withHandlers } from '../..'
 import type { HOC } from '../..'
 
 const enhance: HOC<*, {| +x: number |}> = compose(
-  withProps(props => ({
+  withProps((props) => ({
     y: props.x + 1,
   })),
   // $FlowFixMe[incompatible-use] - TBD expected error here?
   withHandlers({
-    sayHello: ({ y }) => () => {
-      console.log('Hello', y)
-    },
+    sayHello:
+      ({ y }) =>
+      () => {
+        console.log('Hello', y)
+      },
   })
 )
 
 const WithProps = toRenderProps(enhance)
 
-const Comp = () =>
+const Comp = () => (
   <WithProps x={1}>
-    {({ y, sayHello }) =>
-      <div onClick={() => sayHello()}>
-        {y}
-      </div>}
+    {({ y, sayHello }) => <div onClick={() => sayHello()}>{y}</div>}
   </WithProps>
+)
 
-const Comp2 = () =>
+const Comp2 = () => (
   // $FlowExpectedError (...)
   <WithProps x={'1'}>
-    {({ y, sayHello }) =>
-      <div onClick={() => sayHello()}>
-        {y}
-      </div>}
+    {({ y, sayHello }) => <div onClick={() => sayHello()}>{y}</div>}
   </WithProps>
+)
 
 // $FlowExpectedError (...) - cannot create `WithProps` element because property `children` is missing in props
 const Comp3 = () => <WithProps x={1} />
 
-const Comp4 = () =>
+const Comp4 = () => (
   <WithProps x={1}>
-    {({ y, sayHello }) =>
+    {({ y, sayHello }) => (
       <div
         onClick={() => {
           ;(sayHello: () => void)
@@ -55,5 +53,7 @@ const Comp4 = () =>
           // $FlowExpectedError (...)
           (y: string)
         }
-      </div>}
+      </div>
+    )}
   </WithProps>
+)

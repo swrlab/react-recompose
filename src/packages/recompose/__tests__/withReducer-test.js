@@ -55,6 +55,7 @@ test('receives state from reducer when initialState is not provided', () => {
 
   const initialState = { counter: 0 }
 
+  // eslint-disable-next-line default-param-last
   const reducer = (state = initialState, action) =>
     action.type === SET_COUNTER ? { counter: action.payload } : state
 

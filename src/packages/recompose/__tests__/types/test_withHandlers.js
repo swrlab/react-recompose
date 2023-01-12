@@ -15,17 +15,17 @@ type EnhancedCompProps = {
 const enhancer: HOC<*, EnhancedCompProps> = compose(
   // $FlowFixMe[incompatible-use]
   withHandlers({
-    onValueChange: props => value => {
+    onValueChange: (props) => (value) => {
       props.onChange(value)
       return true
     },
-    onOtherValueChange: props => value => {
+    onOtherValueChange: (props) => (value) => {
       props.onOtherChange(value)
       return true
     },
   }),
   // here props itself will not be infered without explicit handler args types
-  withProps(props => ({
+  withProps((props) => ({
     valueClone: (props.value: number),
     resType: (props.onValueChange(0): boolean),
     ee: props.onOtherValueChange({ id: 'aa' }),
@@ -41,13 +41,13 @@ const enhancer: HOC<*, EnhancedCompProps> = compose(
 const enhancer2: HOC<*, EnhancedCompProps> = compose(
   // $FlowFixMe[incompatible-use]
   withHandlers(() => ({
-    onValueChange: props => value => {
+    onValueChange: (props) => (value) => {
       props.onChange(value)
       return true
     },
   })),
   // here props itself will not be infered without explicit handler args types
-  withProps(props => ({
+  withProps((props) => ({
     valueClone: (props.value: number),
     resType: (props.onValueChange(0): boolean),
 
@@ -58,7 +58,7 @@ const enhancer2: HOC<*, EnhancedCompProps> = compose(
   }))
 )
 
-const BaseComp = ({ value, onValueChange }) =>
+const BaseComp = ({ value, onValueChange }) => (
   <div
     onClick={() => {
       const res = onValueChange(1)
@@ -73,5 +73,6 @@ const BaseComp = ({ value, onValueChange }) =>
       (value: string)
     }
   </div>
+)
 
 const Enhanced = enhancer(BaseComp)

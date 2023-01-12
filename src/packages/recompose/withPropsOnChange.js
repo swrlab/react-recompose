@@ -6,7 +6,7 @@ import shallowEqual from './shallowEqual'
 import setDisplayName from './setDisplayName'
 import wrapDisplayName from './wrapDisplayName'
 
-const withPropsOnChange = (shouldMapOrKeys, propsMapper) => BaseComponent => {
+const withPropsOnChange = (shouldMapOrKeys, propsMapper) => (BaseComponent) => {
   const factory = createFactory(BaseComponent)
   const shouldMap =
     typeof shouldMapOrKeys === 'function'

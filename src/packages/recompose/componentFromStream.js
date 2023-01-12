@@ -3,7 +3,7 @@ import { createChangeEmitter } from 'change-emitter'
 import $$observable from 'symbol-observable'
 import { config as globalConfig } from './setObservableConfig'
 
-export const componentFromStreamWithConfig = config => propsToVdom =>
+export const componentFromStreamWithConfig = (config) => (propsToVdom) =>
   class ComponentFromStream extends Component {
     state = { vdom: null }
 
@@ -11,8 +11,8 @@ export const componentFromStreamWithConfig = config => propsToVdom =>
 
     // Stream of props
     props$ = config.fromESObservable({
-      subscribe: observer => {
-        const unsubscribe = this.propsEmitter.listen(props => {
+      subscribe: (observer) => {
+        const unsubscribe = this.propsEmitter.listen((props) => {
           if (props) {
             observer.next(props)
           } else {
@@ -29,17 +29,17 @@ export const componentFromStreamWithConfig = config => propsToVdom =>
     // Stream of vdom
     vdom$ = config.toESObservable(propsToVdom(this.props$))
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
       // Subscribe to child prop changes so we know when to re-render
       this.subscription = this.vdom$.subscribe({
-        next: vdom => {
+        next: (vdom) => {
           this.setState({ vdom })
         },
       })
       this.propsEmitter.emit(this.props)
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
       // Receive new props from the owner
       this.propsEmitter.emit(nextProps)
     }
@@ -61,7 +61,7 @@ export const componentFromStreamWithConfig = config => propsToVdom =>
     }
   }
 
-const componentFromStream = propsToVdom =>
+const componentFromStream = (propsToVdom) =>
   componentFromStreamWithConfig(globalConfig)(propsToVdom)
 
 export default componentFromStream

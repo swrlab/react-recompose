@@ -2,9 +2,9 @@ import createFactory from './utils/createFactory'
 import setDisplayName from './setDisplayName'
 import wrapDisplayName from './wrapDisplayName'
 
-const flattenProp = propName => BaseComponent => {
+const flattenProp = (propName) => (BaseComponent) => {
   const factory = createFactory(BaseComponent)
-  const FlattenProp = props =>
+  const FlattenProp = (props) =>
     factory({
       ...props,
       ...props[propName],

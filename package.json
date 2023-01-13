@@ -90,8 +90,8 @@
     "xstream": "^5.0.5"
   },
   "devEngines": {
-    "node": "5.x",
-    "npm": "3.x"
+    "node": "16.x",
+    "npm": "7.x"
   },
   "dependencies": {}
 }

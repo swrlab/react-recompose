@@ -53,7 +53,7 @@
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-replace": "^5.0.2",
-    "baconjs": "^1.0.1",
+    "baconjs": "^2.0.13",
     "chalk": "^4.1.2",
     "change-case": "^4.1.2",
     "codecov": "^3.8.3",

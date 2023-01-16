@@ -2346,10 +2346,10 @@ babel-preset-jest@^29.2.0:
     babel-plugin-jest-hoist "^29.2.0"
     babel-preset-current-node-syntax "^1.0.0"
 
-baconjs@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/baconjs/-/baconjs-1.0.1.tgz#3bb3cc14426840c06fb0b62dd410a5e25fe13d5d"
-  integrity sha512-f4YHGKrxagnsgzrd5E33VIcfTJaFBgBwvwINP0vi0mJW9Rddjda6sG/ICBeT5a5foZmqwWDhRbWpbSH+TLVKxw==
+baconjs@^2.0.13:
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/baconjs/-/baconjs-2.0.13.tgz#4395d26ab00d4917e5fa5fb2374d52c5e1e0e850"
+  integrity sha512-8yiqZeqO1yqly3hGxzAPTdEUJlzeJFFrhkQNdi0LPqhSNBBhexTSEbM/ZKtmvqbgg353iquYnCTdVw3tCFyz8w==
 
 balanced-match@^1.0.0:
   version "1.0.2"

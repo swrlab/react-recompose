@@ -21,8 +21,8 @@ jobs:
       matrix:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
         node-version:
-        - 14.x
         - 16.x
+        - 18.x
         os:
         - ubuntu-latest
         - macos-latest
@@ -30,9 +30,9 @@ jobs:
         # - windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn

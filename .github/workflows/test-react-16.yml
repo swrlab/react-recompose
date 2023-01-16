@@ -17,18 +17,17 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version:
+        - 18.x
         react-version:
-        - 16
         - 16.3
-        - 16.2
-        # - 16.1 - failed with React 16.1, as expected.
+        # - 16.2 - will fail with React < 16.3, as expected.
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn

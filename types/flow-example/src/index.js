@@ -3,7 +3,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import { css } from 'glamor'
-import 'glamor-reset'
 
 css.insert(`
   body, html {
@@ -33,6 +32,7 @@ css.insert(`
 const mountNode = document.getElementById('root')
 ReactDOM.render(<App />, mountNode)
 
+// $FlowFixMe[prop-missing]
 if (module.hot) {
   ;((module.hot: any): {
     accept: (a: string, b: () => void) => void,

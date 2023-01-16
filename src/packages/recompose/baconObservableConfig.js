@@ -1,5 +1,5 @@
 import $$observable from 'symbol-observable'
-import Bacon from 'baconjs'
+import * as Bacon from 'baconjs'
 
 const config = {
   fromESObservable: (observable) =>

@@ -22,7 +22,7 @@ jobs:
         - 18.x
         react-version:
         - 16.3
-        # - 16.2 - will fail with React < 16.3, as expected.
+        - 16.2 # - will fail with React < 16.3, as expected.
 
     steps:
     - uses: actions/checkout@v3
@@ -31,5 +31,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn
-    - run: yarn add --dev react@${{ matrix.react-version }} react-dom@${{ matrix.react-version }} enzyme-adapter-react-16@latest
-    - run: npm test
+    - run: yarn add --dev react@${{ matrix.react-version }} react-dom@${{ matrix.react-version }} enzyme-adapter-react-16@latest flow-bin@0.165.1
+    - run: yarn test

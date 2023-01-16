@@ -2,7 +2,7 @@ import path from 'path'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import { babel } from '@rollup/plugin-babel'
-import replace from 'rollup-plugin-replace'
+import replace from '@rollup/plugin-replace'
 import { uglify } from 'rollup-plugin-uglify'
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
 import { pascalCase } from 'change-case'
@@ -25,6 +25,11 @@ const getBabelOptions = ({ useESModules }) => ({
   plugins: [['@babel/transform-runtime', { useESModules }]],
 })
 
+const replaceOptions = {
+  'process.env.NODE_ENV': JSON.stringify('development'),
+  preventAssignment: true,
+}
+
 const matchSnapshot = process.env.SNAPSHOT === 'match'
 
 export default [
@@ -43,7 +48,7 @@ export default [
       nodeResolve(),
       babel(getBabelOptions({ useESModules: true })),
       commonjs(),
-      replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
+      replace(replaceOptions),
       sizeSnapshot({ matchSnapshot }),
     ],
   },
@@ -63,7 +68,7 @@ export default [
       nodeResolve(),
       babel(getBabelOptions({ useESModules: true })),
       commonjs(),
-      replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+      replace(replaceOptions),
       sizeSnapshot({ matchSnapshot }),
       uglify(),
     ],

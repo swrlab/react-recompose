@@ -22,7 +22,7 @@ jobs:
         - 18.x
         react-version:
         - 16.3
-        - 16.2 # - will fail with React < 16.3, as expected.
+        # - 16.2 - will fail with React < 16.3, as expected.
 
     steps:
     - uses: actions/checkout@v3

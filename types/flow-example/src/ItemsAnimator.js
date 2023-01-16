@@ -30,17 +30,20 @@ type ItemsAnimatorProps = {
 
 // set existential * type for base component,
 // flow is smart enough to infer base component and enhancers props types
-const itemsAnimator = ({ styles, animStyles }) =>
+// $FlowFixMe[missing-local-annot]
+const itemsAnimator = ({ styles, animStyles }) => (
   <TransitionMotion styles={animStyles}>
     {(
       interpolated: Array<{
         key: string,
+        // $FlowFixMe[incompatible-type]
         style: { x: number, y: number, size: number, borderK: number },
+        // $FlowFixMe[incompatible-type]
         data: { ...$Exact<ItemT>, hovered: boolean },
       }>
-    ) =>
+    ) => (
       <div {...styles.component}>
-        {interpolated.map(({ key, data, style }) =>
+        {interpolated.map(({ key, data, style }) => (
           <Item
             key={key}
             color={data.color}
@@ -51,9 +54,11 @@ const itemsAnimator = ({ styles, animStyles }) =>
             y={style.y}
             borderK={style.borderK}
           />
-        )}
-      </div>}
+        ))}
+      </div>
+    )}
   </TransitionMotion>
+)
 
 const enhanceItemsAnimator: HOC<*, ItemsAnimatorProps> = compose(
   /**
@@ -61,6 +66,7 @@ const enhanceItemsAnimator: HOC<*, ItemsAnimatorProps> = compose(
    */
   defaultProps({
     styles: {
+      // $FlowFixMe[prop-missing]
       component: css({
         position: 'absolute',
       }),
@@ -81,57 +87,60 @@ const enhanceItemsAnimator: HOC<*, ItemsAnimatorProps> = compose(
    * Function to calculate items positions size and hover
    * based on mouse position and previously hovered item
    */
+  // $FlowFixMe[incompatible-use]
   withHandlers(() => {
     let hoveredItemId_ = -1
 
     return {
-      getItemsViewProps: ({ mousePos, items, config }) => () => {
-        if (items.length === 0) return []
+      getItemsViewProps:
+        ({ mousePos, items, config }) =>
+        () => {
+          if (items.length === 0) return []
 
-        const itemMaxWidth = config.size * Math.sqrt(2)
-        const cIdx = (items.length - 1) / 2
-        const itemsD = items
-          .map((item, index) => ({
-            ...item,
-            size: hoveredItemId_ === item.id ? config.hoverSize : config.size,
-            x: (index - cIdx) * (itemMaxWidth + config.spacing),
-            y: 0,
-          }))
-          .map(item => ({
-            ...item,
-            x:
-              hoveredItemId_ === item.id
-                ? item.x + (mousePos.x - item.x) / 3
-                : item.x,
-            y:
-              hoveredItemId_ === item.id
-                ? item.y + (mousePos.y - item.y) / 3
-                : item.y,
-          }))
-          .map(item => ({
-            ...item,
-            distance:
-              Math.sqrt(
-                Math.pow(mousePos.x - item.x, 2) + Math.pow(mousePos.y, 2)
-              ) /
-              (item.size * Math.sqrt(2) / 2),
-          }))
-        const nearestItem = [...itemsD].sort(
-          (a, b) => a.distance - b.distance
-        )[0]
+          const itemMaxWidth = config.size * Math.sqrt(2)
+          const cIdx = (items.length - 1) / 2
+          const itemsD = items
+            .map((item, index) => ({
+              ...item,
+              size: hoveredItemId_ === item.id ? config.hoverSize : config.size,
+              x: (index - cIdx) * (itemMaxWidth + config.spacing),
+              y: 0,
+            }))
+            .map((item) => ({
+              ...item,
+              x:
+                hoveredItemId_ === item.id
+                  ? item.x + (mousePos.x - item.x) / 3
+                  : item.x,
+              y:
+                hoveredItemId_ === item.id
+                  ? item.y + (mousePos.y - item.y) / 3
+                  : item.y,
+            }))
+            .map((item) => ({
+              ...item,
+              distance:
+                Math.sqrt(
+                  Math.pow(mousePos.x - item.x, 2) + Math.pow(mousePos.y, 2)
+                ) /
+                ((item.size * Math.sqrt(2)) / 2),
+            }))
+          const nearestItem = [...itemsD].sort(
+            (a, b) => a.distance - b.distance
+          )[0]
 
-        if (nearestItem && nearestItem.distance < 1) {
-          hoveredItemId_ = nearestItem.id
-          // console.log('nearestItem', nearestItem);
-        } else {
-          hoveredItemId_ = -1
-        }
+          if (nearestItem && nearestItem.distance < 1) {
+            hoveredItemId_ = nearestItem.id
+            // console.log('nearestItem', nearestItem);
+          } else {
+            hoveredItemId_ = -1
+          }
 
-        return itemsD.map(item => ({
-          ...item,
-          hovered: item.id === hoveredItemId_,
-        }))
-      },
+          return itemsD.map((item) => ({
+            ...item,
+            hovered: item.id === hoveredItemId_,
+          }))
+        },
     }
   }),
   /**
@@ -144,7 +153,7 @@ const enhanceItemsAnimator: HOC<*, ItemsAnimatorProps> = compose(
    * Prepare data for react-motion
    */
   withProps(({ items, springConfig }) => ({
-    animStyles: items.map(item => ({
+    animStyles: items.map((item) => ({
       key: `${item.id}`,
       data: item,
       style: {
@@ -157,4 +166,5 @@ const enhanceItemsAnimator: HOC<*, ItemsAnimatorProps> = compose(
   }))
 )
 
+// $FlowFixMe[signature-verification-failure]
 export default enhanceItemsAnimator(itemsAnimator)

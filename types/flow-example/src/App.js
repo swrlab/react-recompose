@@ -10,7 +10,8 @@ import type { MousePosition } from './MouseDetector'
 // Enhanced component props type
 type AppProps = {}
 
-const app = ({ styles, items }) =>
+// $FlowFixMe[missing-local-annot]
+const app = ({ styles, items }) => (
   <div {...styles.app}>
     <div {...styles.header}>
       <a href={'https://github.com/acdlite/recompose/types/flow-example'}>
@@ -20,8 +21,9 @@ const app = ({ styles, items }) =>
     </div>
     <div {...styles.content}>
       <MouseDetector>
-        {({ x, y }: MousePosition) =>
-          <ItemsAnimator items={items} spacing={-10} mousePos={{ x, y }} />}
+        {({ x, y }: MousePosition) => (
+          <ItemsAnimator items={items} spacing={-10} mousePos={{ x, y }} />
+        )}
       </MouseDetector>
     </div>
     <div {...styles.footer}>
@@ -29,6 +31,7 @@ const app = ({ styles, items }) =>
       <a href={'https://github.com/istarkov'}>Ivan Starkov</a>
     </div>
   </div>
+)
 
 const appEnhancer: HOC<*, AppProps> = compose(
   defaultProps({
@@ -40,11 +43,13 @@ const appEnhancer: HOC<*, AppProps> = compose(
       { id: 5, title: 'Now!', color: '#FFB02E' },
     ],
     styles: {
+      // $FlowFixMe[prop-missing]
       app: css({
         display: 'flex',
         flex: 1,
         flexDirection: 'column',
       }),
+      // $FlowFixMe[prop-missing]
       header: css({
         padding: '1rem 5rem',
         borderBottom: '1px solid rgba(255,255,255,0.2)',
@@ -58,12 +63,14 @@ const appEnhancer: HOC<*, AppProps> = compose(
           textDecoration: 'none',
         },
       }),
+      // $FlowFixMe[prop-missing]
       content: css({
         display: 'flex',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
       }),
+      // $FlowFixMe[prop-missing]
       footer: css({
         padding: '0.5rem 5rem',
         marginTop: 'auto',
@@ -82,4 +89,5 @@ const appEnhancer: HOC<*, AppProps> = compose(
   })
 )
 
+// $FlowFixMe[signature-verification-failure]
 export default appEnhancer(app)

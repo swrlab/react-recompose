@@ -5,7 +5,7 @@
   "dependencies": {
     "change-emitter": "^0.1.6",
     "flow": "^0.2.3",
-    "flow-bin": "^0.55.0",
+    "flow-bin": "^0.197.0",
     "glamor": "^2.20.40",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -14,6 +14,9 @@
   },
   "devDependencies": {
     "react-scripts": "5.0.1"
+  },
+  "resolutions": {
+    "fbjs": "^3.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

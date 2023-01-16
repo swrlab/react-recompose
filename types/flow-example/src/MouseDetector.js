@@ -21,10 +21,12 @@ type EnhancedMouseDetectorProps = {
 }
 
 // base component
-const mouseDetector = ({ styles, registerChild, children, mousePos }) =>
+// $FlowFixMe[missing-local-annot]
+const mouseDetector = ({ styles, registerChild, children, mousePos }) => (
   <div ref={registerChild} {...styles.component}>
     {children(mousePos)}
   </div>
+)
 
 // set existential * type for base component i.e. mouseDetector,
 // flow is smart enough to infer base component and enhancers props types
@@ -34,6 +36,7 @@ const enhanceMouseDetector: HOC<*, EnhancedMouseDetectorProps> = compose(
    */
   defaultProps({
     styles: {
+      // $FlowFixMe[prop-missing]
       component: css({
         backgroundColor: 'red',
         position: 'relative',
@@ -68,6 +71,7 @@ const enhanceMouseDetector: HOC<*, EnhancedMouseDetectorProps> = compose(
   /**
    * withHandlers hack to intercept document events
    */
+  // $FlowFixMe[incompatible-use]
   withHandlers(() => {
     let resizeHandler_
     let mouseMoveHandler_
@@ -76,56 +80,58 @@ const enhanceMouseDetector: HOC<*, EnhancedMouseDetectorProps> = compose(
       // hovering on state updater functions gives you a type like
       // Void<SomeFunctionType>, Void type helper transforms function result type to void
       // See libdef and tests, I haven't found more prettier solution
-      registerChild: ({ setInitialOffsetYAndScrollY, setMousePosition }) => (
-        ref: ?HTMLDivElement
-      ) => {
-        // I have no idea why window has any type so this is not covered
-        const window: Node = document.defaultView
+      registerChild:
+        ({ setInitialOffsetYAndScrollY, setMousePosition }) =>
+        (ref: ?HTMLDivElement) => {
+          // I have no idea why window has any type so this is not covered
+          const window: Node = document.defaultView
 
-        if (ref) {
-          // like ComponentDidMount if ref is not null
-          resizeHandler_ = () => {
-            if (!ref) return
-            const refRect = ref.getBoundingClientRect()
+          if (ref) {
+            // like ComponentDidMount if ref is not null
+            resizeHandler_ = () => {
+              if (!ref) return
+              const refRect = ref.getBoundingClientRect()
 
-            const docRect =
-              document.documentElement &&
-              document.documentElement.getBoundingClientRect()
+              const docRect =
+                document.documentElement &&
+                document.documentElement.getBoundingClientRect()
 
-            if (docRect) {
-              // documentElement can be null so flow asks to check;
-              const offsetX = refRect.left - docRect.left
-              const offsetY = refRect.top - docRect.top
+              if (docRect) {
+                // documentElement can be null so flow asks to check;
+                const offsetX = refRect.left - docRect.left
+                const offsetY = refRect.top - docRect.top
 
-              setInitialOffsetYAndScrollY(offsetX, offsetY)
+                setInitialOffsetYAndScrollY(offsetX, offsetY)
+              }
             }
+
+            // call initially to update state
+            resizeHandler_()
+
+            mouseMoveHandler_ = (evt: MouseEvent) =>
+              setMousePosition(evt.pageX, evt.pageY)
+
+            // $FlowFixMe[incompatible-call]
+            window.addEventListener('resize', resizeHandler_)
+            // $FlowFixMe[incompatible-call]
+            document.addEventListener('mousemove', mouseMoveHandler_)
+          } else {
+            // like ComponentWillUnmount if ref is null
+
+            if (resizeHandler_)
+              window.removeEventListener('resize', resizeHandler_)
+            if (mouseMoveHandler_)
+              document.removeEventListener('mousemove', mouseMoveHandler_)
+
+            resizeHandler_ = undefined
+            mouseMoveHandler_ = undefined
           }
-
-          // call initially to update state
-          resizeHandler_()
-
-          mouseMoveHandler_ = (evt: MouseEvent) =>
-            setMousePosition(evt.pageX, evt.pageY)
-
-          window.addEventListener('resize', resizeHandler_)
-          document.addEventListener('mousemove', mouseMoveHandler_)
-        } else {
-          // like ComponentWillUnmount if ref is null
-
-          if (resizeHandler_)
-            window.removeEventListener('resize', resizeHandler_)
-          if (mouseMoveHandler_)
-            document.removeEventListener('mousemove', mouseMoveHandler_)
-
-          resizeHandler_ = undefined
-          mouseMoveHandler_ = undefined
-        }
-      },
+        },
     }
   }),
   /**
    * convert mouse coordinates into local
-  */
+   */
   withProps(({ mousePos, offset }) => ({
     mousePos: {
       x: mousePos.x - offset.x,
@@ -134,4 +140,5 @@ const enhanceMouseDetector: HOC<*, EnhancedMouseDetectorProps> = compose(
   }))
 )
 
+// $FlowFixMe[signature-verification-failure]
 export default enhanceMouseDetector(mouseDetector)

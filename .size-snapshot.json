@@ -24,14 +24,14 @@
     }
   },
   "Recompose.umd.js": {
-    "bundled": 55052,
-    "minified": 19616,
-    "gzipped": 5755
+    "bundled": 54781,
+    "minified": 19474,
+    "gzipped": 5727
   },
   "Recompose.min.js": {
-    "bundled": 48319,
-    "minified": 18346,
-    "gzipped": 5334
+    "bundled": 48048,
+    "minified": 18204,
+    "gzipped": 5310
   },
   "Recompose.esm.js": {
     "bundled": 31920,

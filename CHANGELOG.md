@@ -1,5 +1,7 @@
 ## react-recompose v0.32.0
 
+- feat: make release usable from github
+- fix: move recompose-build to build dir
 - feat: add dependabot checks
 - chore: update ci-runs (actions, node, react)
 - chore: update recompose

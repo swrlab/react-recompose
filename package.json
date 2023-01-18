@@ -6,6 +6,10 @@
 		"url": "https://github.com/swrlab/react-recompose.git"
 	},
 	"license": "MIT",
+	"scripts": {
+		"precommit": "cd build && yarn lint-staged",
+		"prepush": "cd build && yarn test"
+	},
 	"bugs": {
 		"url": "https://github.com/swrlab/react-recompose/issues"
 	},

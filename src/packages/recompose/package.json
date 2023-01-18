@@ -1,6 +1,6 @@
 {
   "name": "react-recompose",
-  "version": "0.31.2",
+  "version": "0.32.0",
   "license": "MIT",
   "description": "A React utility belt for function components and higher-order components",
   "keywords": [

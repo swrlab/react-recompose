@@ -1,9 +1,8 @@
 # react-recompose
 
-[![LICENSE](https://img.shields.io/npm/l/react-recompose?style=flat-square)](LICENSE.md)
-[![npm:react-recompose](https://img.shields.io/npm/v/react-recompose?style=flat-square)](https://www.npmjs.com/package/react-recompose)
+![ci workflow](https://github.com/swrlab/react-recompose/actions/workflows/dist-build-test.yml/badge.svg) ![Git Version](https://img.shields.io/github/package-json/v/swrlab/react-recompose.svg?style=flat)
 
-an updated fork of [Recompose](https://github.com/acdlite/recompose)
+an updated fork of [react-recompose](https://github.com/react-recompose/react-recompose) (an updated fork of [Recompose](https://github.com/acdlite/recompose))
 
 <!-- ORIGINAL CONTENT HIDDEN:
 ## A Note from the Author (acdlite, Oct 25 2018):
@@ -49,7 +48,7 @@ npm install recompose --save
 
 It is **highly** recommended to use Yarn to install this fork as an alias, for example:
 
-    yarn add recompose@npm:react-recompose
+    yarn add recompose@swrlab/react-recompose
 
 ### Related modules
 

@@ -8,7 +8,7 @@ let names
 
 exports.getPackageNames = () => {
   if (!names) {
-    names = fs.readdirSync(exports.PACKAGES_SRC_DIR).filter(file => {
+    names = fs.readdirSync(exports.PACKAGES_SRC_DIR).filter((file) => {
       try {
         const packageJsonPath = path.resolve(
           exports.PACKAGES_SRC_DIR,

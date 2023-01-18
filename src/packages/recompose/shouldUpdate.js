@@ -3,7 +3,7 @@ import createFactory from './utils/createFactory'
 import setDisplayName from './setDisplayName'
 import wrapDisplayName from './wrapDisplayName'
 
-const shouldUpdate = test => BaseComponent => {
+const shouldUpdate = (test) => (BaseComponent) => {
   const factory = createFactory(BaseComponent)
   class ShouldUpdate extends Component {
     shouldComponentUpdate(nextProps) {

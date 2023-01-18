@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { setStatic } from '../'
 
 test('setStatic sets a static property on the base component', () => {
-  const BaseComponent = () => <div />
+  function BaseComponent() {
+    return <div />
+  }
   const NewComponent = setStatic('propTypes', { foo: PropTypes.object })(
     BaseComponent
   )

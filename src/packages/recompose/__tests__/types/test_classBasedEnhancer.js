@@ -8,14 +8,15 @@ function fetcher<Response: {}, Base: {}>(
   dest: string,
   nullRespType: ?Response
 ): HOC<{ ...$Exact<Base>, data?: Response }, Base> {
-  return BaseComponent =>
+  return (BaseComponent) =>
     class Fetcher extends React.Component<Base, { data?: Response }> {
-      state = { data: undefined }
+      state: Object = { data: undefined }
       componentDidMount() {
         fetch(dest)
-          .then(r => r.json())
+          .then((r) => r.json())
           .then((data: Response) => this.setState({ data }))
       }
+      // $FlowFixMe[missing-local-annot] - Missing type on destructuring
       render() {
         // $FlowFixMe[cannot-spread-inexact] - TBD expected error here?
         return <BaseComponent {...this.props} {...this.state} />

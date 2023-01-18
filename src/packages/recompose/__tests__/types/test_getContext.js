@@ -12,7 +12,8 @@ const PropTypes = {
 
 type EnhancedCompProps = { eA: 1 }
 
-const Comp = ({ eA }) =>
+// $FlowFixMe[missing-local-annot] - Missing type on destructuring
+const Comp = ({ eA }) => (
   <div>
     {(eA: number)}
     {
@@ -20,6 +21,7 @@ const Comp = ({ eA }) =>
       (eA: string)
     }
   </div>
+)
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
   getContext({
@@ -28,7 +30,7 @@ const enhacer: HOC<*, EnhancedCompProps> = compose(
     color: ((PropTypes.string: any): string),
     num: ((PropTypes.number: any): number),
   }),
-  withProps(props => ({
+  withProps((props) => ({
     eA: (props.eA: number),
     color: (props.color: string),
     // $FlowExpectedError (...) - eA nor any nor string
@@ -36,7 +38,7 @@ const enhacer: HOC<*, EnhancedCompProps> = compose(
     // $FlowExpectedError (...) - color nor any nor number
     colorErr: (props.color: number),
   })),
-  withProps(props => ({
+  withProps((props) => ({
     // $FlowExpectedError (...) - property not found
     err: props.iMNotExists,
   }))

@@ -9,7 +9,7 @@ test('copies non-React static properties from base component to new component', 
   BaseComponent.foo = () => {}
 
   const EnhancedComponent = hoistStatics(
-    mapProps(props => ({ n: props.n * 5 }))
+    mapProps((props) => ({ n: props.n * 5 }))
   )(BaseComponent)
 
   expect(EnhancedComponent.foo).toBe(BaseComponent.foo)
@@ -24,7 +24,7 @@ test('does not copy blacklisted static properties to new component ', () => {
   BaseComponent.bar = () => {}
 
   const EnhancedComponent = hoistStatics(
-    comp => createFactory(comp),
+    (comp) => createFactory(comp),
     { bar: true } // Blacklist
   )(BaseComponent)
 

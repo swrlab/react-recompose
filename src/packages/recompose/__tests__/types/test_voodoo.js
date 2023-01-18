@@ -18,7 +18,8 @@ type EnhancedCompProps = {
   obj: { objPropA: string, objPropB: number },
 }
 
-const Comp = ({ eA, objPropA }) =>
+// $FlowFixMe[missing-local-annot] - Missing type on destructuring
+const Comp = ({ eA, objPropA }) => (
   <div>
     {(eA: number)}
     {(objPropA: string)}
@@ -31,12 +32,15 @@ const Comp = ({ eA, objPropA }) =>
       (objPropA: number)
     }
   </div>
+)
 
-const Comp2 = ({ eA, objPropA }) =>
+// $FlowFixMe[missing-local-annot] - Missing type on destructuring
+const Comp2 = ({ eA, objPropA }) => (
   <div>
     {/* hack to preview types */}
     {/* :: eA, objPropA */}
   </div>
+)
 
 const flattenEnhacer: HOC<*, EnhancedCompProps> = compose(
   (flattenProp('obj'): HOC<
@@ -46,7 +50,7 @@ const flattenEnhacer: HOC<*, EnhancedCompProps> = compose(
     },
     EnhancedCompProps
   >),
-  withProps(props => ({
+  withProps((props) => ({
     eA: (props.eA: number),
     // $FlowExpectedError (...)
     eB: (props.eA: string),
@@ -56,8 +60,9 @@ const flattenEnhacer: HOC<*, EnhancedCompProps> = compose(
 const EnhancedComponent = flattenEnhacer(Comp)
 const EnhancedComponent2 = flattenEnhacer(Comp2)
 
-// renameEnhacer voodoo (you don't need it, use withProps instead)
-const RenameComp = ({ eA, objNew, obj }) =>
+// renameEnhancer voodoo (you don't need it, use withProps instead)
+// $FlowFixMe[missing-local-annot] - Missing type on destructuring
+const RenameComp = ({ eA, objNew, obj }) => (
   <div>
     {(eA: number)}
 
@@ -82,6 +87,7 @@ const RenameComp = ({ eA, objNew, obj }) =>
       (obj: string)
     }
   </div>
+)
 
 const renameEnhacer: HOC<*, EnhancedCompProps> = compose(
   (renameProp('obj', 'objNew'): HOC<
@@ -93,7 +99,7 @@ const renameEnhacer: HOC<*, EnhancedCompProps> = compose(
     },
     EnhancedCompProps
   >),
-  withProps(props => ({
+  withProps((props) => ({
     eA: (props.eA: number),
     // $FlowExpectedError (...)
     eB: (props.eA: string),
@@ -113,7 +119,7 @@ const renamePropsEnhacer: HOC<*, EnhancedCompProps> = compose(
     },
     EnhancedCompProps
   >),
-  withProps(props => ({
+  withProps((props) => ({
     eA: (props.eA: number),
     // $FlowExpectedError (...)
     eB: (props.eA: string),
@@ -129,7 +135,7 @@ const withStateEnhancer: HOC<*, EnhancedCompProps> = compose(
     },
     EnhancedCompProps
   >),
-  withProps(props => ({
+  withProps((props) => ({
     eA: (props.eA: number),
     // $FlowExpectedError (...)
     eB: (props.eA: string),

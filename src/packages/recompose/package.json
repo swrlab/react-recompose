@@ -1,5 +1,7 @@
 {
   "name": "react-recompose",
+  "version": "0.32.0",
+  "license": "MIT",
   "description": "A React utility belt for function components and higher-order components",
   "keywords": [
     "react",
@@ -13,13 +15,13 @@
   "main": "dist/Recompose.cjs.js",
   "module": "dist/Recompose.esm.js",
   "dependencies": {
-    "@babel/runtime": "^7.16.3",
+    "@babel/runtime": "^7.20.7",
     "change-emitter": "^0.1.2",
-    "hoist-non-react-statics": "^2.5.5",
+    "hoist-non-react-statics": "^3.3.2",
     "react-lifecycles-compat": "^3.0.4",
-    "symbol-observable": "^1.2.0"
+    "symbol-observable": "^4.0.0"
   },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0"
+    "react": "^16.3.0 || ^17.0.0 || ^18.0.0"
   }
 }

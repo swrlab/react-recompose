@@ -3,7 +3,9 @@ import createReactClass from 'create-react-class'
 import isClassComponent from '../isClassComponent'
 
 test('isClassComponent returns false for functions', () => {
-  const Foo = () => <div />
+  function Foo() {
+    return <div />
+  }
 
   expect(isClassComponent(Foo)).toBe(false)
 })

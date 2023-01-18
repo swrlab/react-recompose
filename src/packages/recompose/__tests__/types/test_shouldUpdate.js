@@ -7,7 +7,8 @@ import type { HOC } from '../..'
 
 type EnhancedCompProps = { eA: 1 }
 
-const Comp = ({ eA }) =>
+// $FlowFixMe[missing-local-annot] - Missing type on destructuring
+const Comp = ({ eA }) => (
   <div>
     {(eA: number)}
     {
@@ -15,6 +16,7 @@ const Comp = ({ eA }) =>
       (eA: string)
     }
   </div>
+)
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
   shouldUpdate((props, nextProps) => {
@@ -25,12 +27,12 @@ const enhacer: HOC<*, EnhancedCompProps> = compose(
 
     return props.eA === nextProps.eA
   }),
-  withProps(props => ({
+  withProps((props) => ({
     eA: (props.eA: number),
     // $FlowExpectedError (...) - eA nor any nor string
     eAErr: (props.eA: string),
   })),
-  withProps(props => ({
+  withProps((props) => ({
     // $FlowExpectedError (...) - property not found
     err: props.iMNotExists,
   }))

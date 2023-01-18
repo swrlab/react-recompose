@@ -24,15 +24,15 @@ type ItemProps = {
   hoveredColor?: string,
 }
 
-const item = ({ title, componentDynamicStyle, styles, borders }) =>
+// $FlowFixMe[missing-local-annot]
+const item = ({ title, componentDynamicStyle, styles, borders }) => (
   <div {...styles.component} style={componentDynamicStyle}>
-    <div {...styles.title}>
-      {title}
-    </div>
-    {borders.map(({ style, id }) =>
+    <div {...styles.title}>{title}</div>
+    {borders.map(({ style, id }) => (
       <div key={id} style={style} {...styles.border} />
-    )}
+    ))}
   </div>
+)
 
 // set existential * type for base component,
 // flow is smart enough to infer base component and enhancers props types
@@ -40,15 +40,18 @@ const enhanceItem: HOC<*, ItemProps> = compose(
   defaultProps({
     title: '',
     styles: {
+      // $FlowFixMe[prop-missing]
       component: css({
         position: 'absolute',
         display: 'flex',
       }),
+      // $FlowFixMe[prop-missing]
       title: css({
         margin: 'auto',
         color: 'deeppink',
         fontWeight: '600',
       }),
+      // $FlowFixMe[prop-missing]
       border: css({
         position: 'absolute',
         border: '1px solid deeppink',
@@ -81,12 +84,16 @@ const enhanceItem: HOC<*, ItemProps> = compose(
       styles: {
         ...styles,
         title: hovered
-          ? css(styles.title, { color: hoveredColor })
-          : css(styles.title, { color: textColor }),
+          ? // $FlowFixMe[prop-missing]
+            css(styles.title, { color: hoveredColor })
+          : // $FlowFixMe[prop-missing]
+            css(styles.title, { color: textColor }),
 
         border: hovered
-          ? css(styles.border, { borderColor: hoveredColor })
-          : css(styles.border, { borderColor: color }),
+          ? // $FlowFixMe[prop-missing]
+            css(styles.border, { borderColor: hoveredColor })
+          : // $FlowFixMe[prop-missing]
+            css(styles.border, { borderColor: color }),
       },
     })
   ),
@@ -106,14 +113,17 @@ const enhanceItem: HOC<*, ItemProps> = compose(
    * generate borders props
    */
   withProps(({ borderCount, borderK }) => ({
-    borders: Array(borderCount).fill(0).map((_, index) => ({
-      id: index,
-      style: {
-        transform: `rotate(${borderK * Math.PI * index / borderCount}rad)`,
-        borderRadius: 5,
-      },
-    })),
+    borders: Array(borderCount)
+      .fill(0)
+      .map((_, index) => ({
+        id: index,
+        style: {
+          transform: `rotate(${(borderK * Math.PI * index) / borderCount}rad)`,
+          borderRadius: 5,
+        },
+      })),
   }))
 )
 
+// $FlowFixMe[signature-verification-failure]
 export default enhanceItem(item)

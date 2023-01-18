@@ -2,7 +2,7 @@ import createFactory from './utils/createFactory'
 import setDisplayName from './setDisplayName'
 import wrapDisplayName from './wrapDisplayName'
 
-const getContext = contextTypes => BaseComponent => {
+const getContext = (contextTypes) => (BaseComponent) => {
   const factory = createFactory(BaseComponent)
   const GetContext = (ownerProps, context) =>
     factory({

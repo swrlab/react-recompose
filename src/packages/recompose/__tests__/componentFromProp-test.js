@@ -6,11 +6,11 @@ test('componentFromProp creates a component that takes a component as a prop and
   const Container = componentFromProp('component')
   expect(Container.displayName).toBe('componentFromProp(component)')
 
-  const Component = ({ pass }) =>
-    <div>
-      Pass: {pass}
-    </div>
+  function Component({ pass }) {
+    return <div>Pass: {pass}</div>
+  }
 
+  // eslint-disable-next-line react/jsx-no-bind
   const wrapper = mount(<Container component={Component} pass="through" />)
   const div = wrapper.find('div')
   expect(div.text()).toBe('Pass: through')

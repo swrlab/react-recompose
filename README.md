@@ -1,6 +1,6 @@
 # react-recompose
 
-![ci workflow](https://github.com/swrlab/react-recompose/actions/workflows/dist-build-test.yml/badge.svg) ![Git Version](https://img.shields.io/github/package-json/v/swrlab/react-recompose?filename=src%2Fpackages%2Frecompose%2Fpackage.json?style=flat)
+![ci workflow](https://github.com/swrlab/react-recompose/actions/workflows/dist-build-test.yml/badge.svg) ![Git Version](https://img.shields.io/github/package-json/v/swrlab/react-recompose.svg?style=flat)
 
 an updated fork of [react-recompose](https://github.com/react-recompose/react-recompose) (an updated fork of [Recompose](https://github.com/acdlite/recompose))
 

@@ -28,6 +28,10 @@ jobs:
         # FOR FUTURE CONSIDERATION:
         # - windows-latest
 
+    defaults:
+      run:
+        working-directory: build
+
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}

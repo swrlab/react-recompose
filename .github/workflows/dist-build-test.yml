@@ -29,6 +29,10 @@ jobs:
           - 16.x
           - 18.x
 
+    defaults:
+      run:
+        working-directory: build
+
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
@@ -40,6 +44,10 @@ jobs:
       - name: add (--dev) required dependencies
         # FUTURE TODO should install dependencies as specified src/packages/recompose/package.json
         run: yarn add --dev @babel/runtime change-emitter hoist-non-react-statics react-lifecycles-compat
+      - name: copy lib/packages/recompose/dist from root /lib
+        run: |
+          mkdir -p lib/packages/recompose
+          cp -r ../lib/packages/recompose/dist lib/packages/recompose/
       - name: copy __tests__ from src/packages/recompose
         run: cp -r src/packages/recompose/__tests__ lib/packages/recompose/dist
       - name: copy js files needed for some tests # FUTURE TODO only copy js files **actually** needed here

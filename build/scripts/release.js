@@ -148,13 +148,13 @@ try {
   )
 
   log(`About to publish ${packageName}@${nextVersion} to npm.`)
-  if (!readline.keyInYN('Sound good? ')) {
+  if (!readline.keyInYN('Sound good? (no release, only dry-run) ')) {
     log('OK. Stopping release.')
     exit(0)
   }
 
   log('Publishing...')
-  if (exec(`cd ${outDir} && npm publish`).code !== 0) {
+  if (exec(`cd ${outDir} && npm publish --dry-run`).code !== 0) {
     logError('Publish failed. Aborting release.')
     exit(1)
   }

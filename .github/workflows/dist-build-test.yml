@@ -45,7 +45,9 @@ jobs:
         # FUTURE TODO should install dependencies as specified src/packages/recompose/package.json
         run: yarn add --dev @babel/runtime change-emitter hoist-non-react-statics react-lifecycles-compat
       - name: copy __tests__ from src/packages/recompose
-        run: cp -r src/packages/recompose/__tests__ lib/packages/recompose/dist
+        run: |
+          mkdir -p lib/packages/recompose/dist
+          cp -r src/packages/recompose/__tests__ lib/packages/recompose/dist
       - name: copy js files needed for some tests # FUTURE TODO only copy js files **actually** needed here
         run: |
           cp src/packages/recompose/*.js lib/packages/recompose/dist

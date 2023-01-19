@@ -148,12 +148,14 @@ try {
   )
 
   log(`About to publish ${packageName}@${nextVersion} to npm.`)
+  // if (!readline.keyInYN('Sound good? ')) {
   if (!readline.keyInYN('Sound good? (no release, only dry-run) ')) {
     log('OK. Stopping release.')
     exit(0)
   }
 
   log('Publishing...')
+  // if (exec(`cd ${outDir} && npm publish`).code !== 0) {
   if (exec(`cd ${outDir} && npm publish --dry-run`).code !== 0) {
     logError('Publish failed. Aborting release.')
     exit(1)
@@ -166,7 +168,8 @@ try {
 
   log('Committing changes...')
   const newTagName = `v${nextVersion}`
-  exec(`git add ${versionLoc}`)
+  // exec(`git add ${versionLoc}`)
+  exec(`git add -A`)
   exec(`git commit -m "${packageName} ${newTagName}"`)
 
   if (packageName === 'recompose') {

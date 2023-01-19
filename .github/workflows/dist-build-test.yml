@@ -45,14 +45,14 @@ jobs:
         # FUTURE TODO should install dependencies as specified src/packages/recompose/package.json
         run: yarn add --dev @babel/runtime change-emitter hoist-non-react-statics react-lifecycles-compat
       - name: copy __tests__ from src/packages/recompose
-        run: cp -r src/packages/recompose/__tests__ ../lib/packages/recompose/dist
+        run: cp -r src/packages/recompose/__tests__ lib/packages/recompose/dist
       - name: copy js files needed for some tests # FUTURE TODO only copy js files **actually** needed here
         run: |
-          cp src/packages/recompose/*.js ../lib/packages/recompose/dist
-          cp -r src/packages/recompose/utils ../lib/packages/recompose/dist
+          cp src/packages/recompose/*.js lib/packages/recompose/dist
+          cp -r src/packages/recompose/utils lib/packages/recompose/dist
       - name: remove test(s) not working with dist build # FUTURE TODO get all tests working with the dist build
         run: |
-          rm ../lib/packages/recompose/dist/__tests__/mapPropsStream-test.js
-          rm ../lib/packages/recompose/dist/__tests__/mapPropsStreamWithConfig-test.js # issue with Recompose.umd.js
-      - run: cp ../lib/packages/recompose/dist/${{ matrix.dist-output }} ../lib/packages/recompose/dist/index.js
-      - run: yarn jest ../lib/packages/recompose/dist
+          rm lib/packages/recompose/dist/__tests__/mapPropsStream-test.js
+          rm lib/packages/recompose/dist/__tests__/mapPropsStreamWithConfig-test.js # issue with Recompose.umd.js
+      - run: cp lib/packages/recompose/dist/${{ matrix.dist-output }} lib/packages/recompose/dist/index.js
+      - run: yarn jest lib/packages/recompose/dist
